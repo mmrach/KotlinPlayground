@@ -4,8 +4,8 @@ import java.util.Arrays
 import java.util.Locale
 
 fun main(){
-    variables()
-    //operators()
+    //variables()
+    operators()
     //ifAndWhen()
     //loops()
     //functions()
@@ -216,7 +216,7 @@ fun operators(){
     val d=12
     println(c/d)  //Devuelve un valor double. División float con que al menos uno sea double o float.
 
-    //Módulo
+    //Módulo (resto de una división)
     val cociente=21
     val divisor=2
 
@@ -235,13 +235,24 @@ fun operators(){
 //    }
     println("----------------------")
 
+    //Valores iniciales del array
+    for (i in 0..miArray.size-1){
+        println(miArray[i])
+    }
+
+    //El elemento cuyo indice coincide con el resto se incrementa en 2
     for (i in 0..9){
         println("$i % 5 = " + i%5)
         miArray[i%5]+=2
     }
+
+    //Valores finales del array
     for (i in 0..miArray.size-1){
         println(miArray[i])
     }
+
+    //Printamos el array utilizando la librería array
+    println(Arrays.toString(miArray))
 
     //Unary Oparators
     println("\n----------------------------------")
@@ -273,6 +284,7 @@ fun operators(){
     var v = -12
     var w = 12
 
+    // El valor max se asigna al resultado (ultimo retorono) del branch del if que corresponda
     // use of greater than operator
     // Use of if  else statement
     val max = if (v > w) {
@@ -304,15 +316,18 @@ fun operators(){
     var numbers = intArrayOf(1, 4, 42, -3)
     println(Arrays.toString(numbers)) //Al poner esta sentencia nos invita a inportar la librería Arrays
 
-    if (6 in numbers) {
-        println("numbers array contains 4.")
+    var valorBuscado=4
+    if (valorBuscado in numbers) {
+        println("El array \"numbers\" contiene el  $valorBuscado")
     }
     else println("No esta")
 
+    //Realmente estamos convirtiendo un array en string para su impresión
     val miString:String = Arrays.toString(numbers)
     println(miString)
 
     //Index Access Operator
+    //Utilizamos el operador de accesop or índice [indice] para cambiar el valor de un elemento
     println("\n----------------------------------")
     println("Index Access Operator")
     numbers  = intArrayOf(1, 2, 3, 4, - 1)
