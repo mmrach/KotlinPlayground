@@ -5,8 +5,8 @@ import java.util.Locale
 
 fun main(){
     //variables()
-    operators()
-    //ifAndWhen()
+    //operators()
+    ifAndWhen()
     //loops()
     //functions()
     //lambdas()
@@ -420,6 +420,8 @@ fun ifAndWhen(){
     }
 
     //Using When as expression
+    //La variable toma el valor de la ultima expresión del bloque.
+    //Es nuestra responsabilidad que el bloque devuelva un string como ultima expressión
     println("\n----------------------------------")
     println("Using When as expression")
     var dayOfWeekInString = when(dayOfWeek) {
@@ -446,6 +448,8 @@ fun ifAndWhen(){
     }
 
     //Checking whether a given value is in a range or not using in operator
+    //Utilizamos el operador in o not in !in con un rango como opción del when
+    //Solo sale por la primera opción que cumple
     println("\n----------------------------------")
     println("Checking whether a given value is in a range or not using in operator")
     var dayOfMonth = 6
