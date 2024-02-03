@@ -6,8 +6,8 @@ import java.util.Locale
 fun main(){
     //variables()
     //operators()
-    ifAndWhen()
-    //loops()
+    //ifAndWhen()
+    loops()
     //functions()
     //lambdas()
     //destructuring()
@@ -542,19 +542,21 @@ fun loops(){
     var primeNumbers = intArrayOf(2, 3, 5, 7, 11)
     println(Arrays.toString(primeNumbers))
 
+    println("\n----------------------------------")
     for(index in primeNumbers.indices) {
-        println("PrimeNumber(${index+1}): ${primeNumbers[index]}")
+        println("PrimeNumber[${index}]: ${primeNumbers[index]}")
     }
 
+    println("\n----------------------------------")
     for(ix in 1..primeNumbers.size-1 ){
-        println("PrimeNumber(${ix+1}): ${primeNumbers[ix]}")
+        println("PrimeNumber[${ix}]: ${primeNumbers[ix]}")
     }
 
     //Foor Loop: Iterating through an array using withIndex()
     println("\n----------------------------------")
     println("Foor Loop: Iterating through an array using withIndex()")
     for((index, number) in primeNumbers.withIndex()) {
-        println("PrimeNumber(${index+1}): $number")
+        println("PrimeNumber[${index}]: $number")
     }
 
     //Break and Continue
@@ -568,11 +570,13 @@ fun loops(){
     }
 
     //Skip to the next iteration of a loop using the continue keyword
+    //Mostramos solo los impares
+    println("\n----------------------------------")
     for (num in 1..10) {
         if (num%2 == 0) {
             continue;
         }
-        print("${num} ")
+        print("$num ")
     }
 
 
