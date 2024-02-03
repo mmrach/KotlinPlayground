@@ -29,7 +29,11 @@ fun variables(){
     //---------------------------------------------------
     var name="Kotlin" //mutable
     val myName="Miguel" //inmutable
-    //Error       myName="Pepe"
+    //La siguiente línea produce un error (descomentar para verlo)
+    //myName="Pepe"
+
+    //println incluye salto de linea
+    //print no lo lleva, para saltar añadir \n
     println(name)
     println("Hello $name")
     println("Cambiame de línea $name")
@@ -40,12 +44,19 @@ fun variables(){
     //val nombre
     //nombre = "Miguel"
 
-    val yo:String
-    yo = "Miguel"
+    val yo:String  //Inidicamos el tipo en la declaración
+    yo = "Miguel"  //Asignamos de ese tipo
 
+    //La siguiente linea da error, indica que es inmutable
+    //yo=4
+
+    val mivariable:String  //Declaramos una variable String
+    //La siguiente linea da error diciendo que el tipo no es el esperado
+    //mivariable=5
+
+    //Kotlin es sensible a mayusculas/minusculas en el nombre de variables y funciones.
     val miNombre:String = "Onofre"
-
-    println("Hola $miNombre $miNombre")
+    println("Hola $miNombre $miNombre")  //Multiples interpolaciones
 
     //Intro to variable types Int and String
     //Basic Types in Kotlin
@@ -62,6 +73,7 @@ fun variables(){
     myByte = -120 // -120   127   128 (error) -129 (error)
     //myByte =-129
 
+    //Un short son 2 bytes, es un entero de 16 bits
     val myShort: Short
     myShort = 32345
 
@@ -97,10 +109,11 @@ fun variables(){
     val numbers: IntArray = intArrayOf(1, 2, 3, 4, 5, 6, 7)
     println("Value at 3rd position : " + numbers[2])
     var i:Int
+    //Bucle iterando por una secuencia desde 0 hasta el tamaño del array numbers
     for (i in 0..numbers.size-1){
-        println(numbers[i])
+        println(numbers[i])  //Acceso a los elementos el array por indice
     }
-    println(numbers.indices)
+    println(numbers.indices) //Mostramos los índices del array
 
     dataTypeConversion()
 
@@ -114,12 +127,15 @@ fun tiposNumericosBasicos(){
     val s: Short = 10
     val b: Byte = 1
 
+    println();
+    println("----function tiposNumericosBasicos  ----------------")
     println("Int Value is " + a)
     println("Double  Value is " + d)
     println("Float Value is " + f)
     println("Long Value is " + l )
     println("Short Value is " + s)
     println("Byte Value is " + b)
+    println("-------------------------------------")
 }
 
 fun tiposTextoBasicos(){
@@ -128,17 +144,19 @@ fun tiposTextoBasicos(){
     println("$letter")
 
     //Caracterers Especiales
+    println("----function tiposTextoBasicos  ----------------")
     println("Caracteres especiales")
     println("........................")
     print('\n') //prints a newline character
     println("........................")//Si usamos println serían dos saltos
-    println('\"') //prints a dollar $ character
+    println('\"') //prints a quotes " character
     println('\$') //prints a dollar $ character
     println('\\') //prints a back slash \ character
 
     //Escaped Strings y Raw Strings
     val escapedString : String  = "I am escaped String!\n"
-    var rawString :String  = """
+    //Triples comillas abre y cierra un texto raw.
+    var rawString :String  = """  
 This is going to be a (asdñlfklj j!!" d3 $ \ns
 multi-line string and will $escapedString
 not have any escape sequence"""
@@ -147,6 +165,8 @@ not have any escape sequence"""
     println(rawString)
 
     //Concatenación de Strings
+    println("Concatenación de Strings")
+    println("........................")
     val start = "Talk is cheap."
     val middle = "Show me the code."
     val end = "- Linus Torvalds"
@@ -154,10 +174,12 @@ not have any escape sequence"""
     val result = start + middle + end
     println(result)
     println(start + " " + middle + " "+ end);  println("$start $middle $end")
+    println("-------------------------------------")
 
 }
 
 fun tipoBoolean(){
+    println("----function tiposTextoBasicos  ----------------")
     val A: Boolean = true   // defining a variable with true value
     val B: Boolean = false   // defining a variable with false value
     val C = true
@@ -168,12 +190,14 @@ fun tipoBoolean(){
     //Nullable Boolean   (cualquier tipo en realidad con ? detrás)
     val boolNull: Boolean? = null
     println("Value of boolNull $boolNull")
+    println("-------------------------------------")
 }
 
 fun dataTypeConversion(){
     val x: Int = 100
+    //La siguiente asignación no es valida pues se define el valor como Long. No hace casting automatico.
     //val y: Long = x  // Not valid assignment
-    val y: Long = x.toLong()
+    val y: Long = x.toLong()  //Hay que hacerlo con variable.to<TipoDato>
 
     println("\n----------------------------------")
     println("Data Type Conversion")
