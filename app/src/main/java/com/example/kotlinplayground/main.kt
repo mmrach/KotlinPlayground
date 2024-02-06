@@ -7,8 +7,8 @@ fun main(){
     //variables()
     //operators()
     //ifAndWhen()
-    loops()
-    //functions()
+    //loops()
+    functions()
     //lambdas()
     //destructuring()
     //collections()
@@ -622,6 +622,15 @@ fun functions(){
     println("OverTrheshold")
     var value=0
     while (!overThreshold(value)){
+        println("$value -> under or at threshold")
+        value++
+    }
+    println("With $value we are over threshold")
+
+    println("\n----------------------------------")
+    println("OverTrhesh")
+    value=0
+    while (!overThresh(value)){
         println("$value -> under or at threshold")
         value++
     }
