@@ -8,8 +8,8 @@ fun main(){
     //operators()
     //ifAndWhen()
     //loops()
-    functions()
-    //lambdas()
+    //functions()
+    lambdas()
     //destructuring()
     //collections()
     //clases()
@@ -704,9 +704,15 @@ fun lambdas(){
     println("\n----------------------------------")
     println("CatAge con Lambda")
     //Transformar la función CalulateCatAge como una Lambda
-    val catAge: (Int) -> Int = {
-        it*7}
+    val catAge: (Int) -> Int = { valor: Int ->  valor*7}
     println(catAge(7))
+
+    println("CatAge con Lambda el body a otra línea")
+    //Transformar la función CalulateCatAge como una Lambda
+    val catAge2: (Int) -> Int = { valor: Int ->
+        valor*7
+        }
+    println(catAge2(7))
 
     println("\n----------------------------------")
     println("Using it as parameter")
@@ -746,6 +752,7 @@ fun lambdas(){
     //LLamamos a processLanguaes con el action definido
     processLanguages(languages, action)
 
+
     //Creamos otro lambda y otra forma de construirla
     val action2: (String) -> Unit = {  print("[$it]")}
 
@@ -757,13 +764,22 @@ fun lambdas(){
     println("\n... pasando la definción en la llamada")
     processLanguages(languages, {language:String -> print("[ $language ]") } )
 
+
+
     //Pero esta forma de llamara a la función es un poco enrevesada de leer
     //En este caso el cuerpo de la lambda es corto y puede verse, pero si es mas largo se complica la lectura del código.
     //Por eso Kotlin ha definido la sintaxis especial Trailing Lambda que se puede aplicar
     //cuando la lambda es el último parámetro en la llamada a una función.
     //Usando la sintaxis Trailing Lambda, la lambda se puede poner fuera de la llamada a la función.
-    println()
+    println("\n-----------------------")
 
+    processLanguages(languages) { language:String ->
+        println("--> $language")
+    }
+
+    //Ademas podemos  omitir el tipo de datos de language pues lo infiere el compilador del List
+    //que recibe como primer parámetro.
+    println("\n-----------------------")
     processLanguages(languages) { language ->
         println("--> $language")
     }
@@ -786,14 +802,14 @@ fun lambdas(){
         sumaLambda(3,4)
     }
 
-
-
     println("\n----------------------------------")
     println("Más lambdas as functions arguments")
+    println(languages)
     languages.forEach { println(it) }
+
+    println("-------")
     // Aplicamos funciones encadenadas al array de lambdas.
     // Es decir, primero seleccionamos los que empiezan por K, luego lo pasamos a minúsculas y todos ellos los imprimimos
-    println("-------")
     languages
         .filter { it.startsWith("K")}
         //La siguiente llamada tiene tela, la función replaceFirstChar (que suplanta a .capitalize())
@@ -802,17 +818,18 @@ fun lambdas(){
         .forEach {
             println(it)
         }
+
     //Lo mismo se vería de esta forma si no existiese la sintaxis trailing lambda
     println("\nSin la sintaxis trailing lambda")
     languages.forEach({ println(it) })
     languages
         .filter({ it.startsWith("K")})
-        .map({ it.replaceFirstChar { it.lowercase()}  }) //Fijaros que aquí capitalize lo marca como deprecated y nos aconseja el uso de replaceFirstChar
+        .map({ it.replaceFirstChar { it.lowercase()}  })
         .forEach({ println(it) })
 
 
     //EJERCICIO: ***********************************************************
-    //Hacer hacer lo mismo pero para todos los lenguajes que tienen una 'a' en su nombre
+    //Utilizar esta tecnica de encadenar lambdas para mostrar sólo los  lenguajes que tienen una 'a' en su nombre
     println("\nLenguajes que contienen una a")
     languages
         .filter { it.contains('a') }
@@ -956,12 +973,12 @@ fun lambdas(){
     println("Ejemplo de multiples ")
     val lambdaMultipleString = greet@ { greeting: String, name: String ->
         if(greeting.length < 3) return@greet ""
-        if(greeting.length < 6) return@greet "Welcome !"
+        if(greeting.length < 6) return@greet "Hola !"
 
         "$greeting $name !"
     }
     println("Return vacio : " + lambdaMultipleString("Hi","Miguel"))
-    println("Return Welcome:" +lambdaMultipleString("Hola","Miguel"))
+    println("Return Hola:" + lambdaMultipleString("Hola","Miguel"))
     println("Return Default:" + lambdaMultipleString("Welcome","Miguel"))
 
     println("\n----------------------------------")
@@ -977,7 +994,7 @@ fun lambdas(){
     }
     lambdaClousure() // output: Welcome Our Favorite Student
     currentStudentName = "Onofre"
-    lambdaClousure() // output: Welcome Nate
+    lambdaClousure() // output: Welcome Onofre
 }
 
 fun sumaNormal(x:Int, y:Int):Int{
