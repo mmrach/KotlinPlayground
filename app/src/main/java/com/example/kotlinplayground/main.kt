@@ -548,7 +548,7 @@ fun loops(){
     }
 
     println("\n----------------------------------")
-    for(ix in 1..primeNumbers.size-1 ){
+    for(ix in 0..primeNumbers.size-1 ){
         println("PrimeNumber[${ix}]: ${primeNumbers[ix]}")
     }
 
@@ -572,6 +572,7 @@ fun loops(){
     //Skip to the next iteration of a loop using the continue keyword
     //Mostramos solo los impares
     println("\n----------------------------------")
+    println("Sólo los impares\n")
     for (num in 1..10) {
         if (num%2 == 0) {
             continue;
