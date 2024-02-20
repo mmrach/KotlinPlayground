@@ -9,9 +9,9 @@ fun main(){
     //ifAndWhen()
     //loops()
     //functions()
-    lambdas()
+    //lambdas()
     //destructuring()
-    //collections()
+    collections()
     //clases()
     //interfaces()
     //extensionFunctions()
@@ -69,16 +69,16 @@ fun variables(){
     //-------------------
     tiposNumericosBasicos()
 
-    var myByte: Byte
-    myByte = -120 // -120   127   128 (error) -129 (error)
-    //myByte =-129
+    var myByte: UByte
+    myByte = 120u // -120   127   128 (error) -129 (error)
+    myByte = 129u
 
     //Un short son 2 bytes, es un entero de 16 bits
     val myShort: Short
     myShort = 32345
 
     println(myShort)
-    //println(myshort") // Error no está entre comillas.
+    println("$myShort") // Error no está entre comillas.
 
     //Long Values  'L'
     println("\n----------------------------------")
@@ -92,21 +92,23 @@ fun variables(){
     println("\n----------------------------------")
     println("Floating type numbers")
     val piDouble = 3.14159265359  //por defecto los números con decimales son  Double
-    val myPif = 3.14159265359f //Warning de precisión
+    //val myPif = 3.14159265359f //Warning de precisión
     println(piDouble)
+    val myPif = 3.141592f //Ahora con f  o  F  es un Float
     println(myPif)  //Salen menos decimales en consola. La precisión no es válida. Se redondea.
-    //val myPif = 3.141592f //Ahora con f  o  F  es un Float
 
     //-------------------------
     println("\n----------------------------------")
     println("Tipos Básicos")
     tiposTextoBasicos()
+
     tipoBoolean()
 
     //Arrays
     println("\n----------------------------------")
     println("Arrays")
-    val numbers: IntArray = intArrayOf(1, 2, 3, 4, 5, 6, 7)
+    val numbers: IntArray = intArrayOf(1, 2, 3, 4, 5, 6, 7, 8)
+
     println("Value at 3rd position : " + numbers[2])
     var i:Int
     //Bucle iterando por una secuencia desde 0 hasta el tamaño del array numbers
@@ -156,13 +158,18 @@ fun tiposTextoBasicos(){
     //Escaped Strings y Raw Strings
     val escapedString : String  = "I am escaped String!\n"
     //Triples comillas abre y cierra un texto raw.
-    var rawString :String  = """  
+    val rstring="""
+sdfñlkjañdfkljñsdlkfj asdf
+         asdfklñjasdñlfkkj asdf
+          ákjsdf ñalskjd fñlalsdjk 
+    lskjdf halñkhj dsf
+    """
+    var rawString :String  = """
 This is going to be a (asdñlfklj j!!" d3 $ \ns
-multi-line string and will $escapedString
-not have any escape sequence"""
-
+multi-line string and will ${escapedString}not have any escape sequence"""
     print(escapedString)
     println(rawString)
+    println(rstring)
 
     //Concatenación de Strings
     println("Concatenación de Strings")
@@ -173,7 +180,8 @@ not have any escape sequence"""
 
     val result = start + middle + end
     println(result)
-    println(start + " " + middle + " "+ end);  println("$start $middle $end")
+    println(start + " " + middle + " "+ end);
+    println("$start $middle $end")
     println("-------------------------------------")
 
 }
@@ -198,10 +206,12 @@ fun dataTypeConversion(){
     //La siguiente asignación no es valida pues se define el valor como Long. No hace casting automatico.
     //val y: Long = x  // Not valid assignment
     val y: Long = x.toLong()  //Hay que hacerlo con variable.to<TipoDato>
+    val f: Float = x.toFloat()
 
     println("\n----------------------------------")
     println("Data Type Conversion")
     println(y)
+    println(f)
 }
 
 fun operators(){
@@ -386,7 +396,8 @@ fun ifAndWhen(){
     x=1
     when (x) {
         1 -> {
-            print("x == 1")
+            println("x == 1")
+            print("hola")
         }
         2 -> print("x == 2")
         else -> {
@@ -446,6 +457,13 @@ fun ifAndWhen(){
         6, 7 -> println("Weekend")
         else -> println("Invalid Day")
     }
+    dayOfWeek = 3
+    var tipoDiaString = when(dayOfWeek) {
+        1, 2, 3, 4, 5 -> "Weekday"
+        6, 7 -> "Weekend"
+        else -> "Invalid Day"
+    }
+    println("La variable es " + tipoDiaString)
 
     //Checking whether a given value is in a range or not using in operator
     //Utilizamos el operador in o not in !in con un rango como opción del when
@@ -454,8 +472,8 @@ fun ifAndWhen(){
     println("Checking whether a given value is in a range or not using in operator")
     var dayOfMonth = 6
     when(dayOfMonth) {
-        in 1..7 -> println("We're in the first Week of the Month")
         !in 15..21 -> println("We're not in the third week of the Month")
+        in 1..7 -> println("We're in the first Week of the Month")
         else -> println("none of the above")
     }
 
@@ -469,7 +487,7 @@ fun ifAndWhen(){
         is Double -> println("$y is Double")
         else -> println("none of the above")
     }
-    val miVariable= when(y) {
+    val miVariable = when(y) {
         is Int -> "$y is an Int"
         is String -> "$y is a String"
         is Double -> "$y is Double"
@@ -507,7 +525,7 @@ fun loops(){
     //do while loop
     println("\n----------------------------------")
     println("do while loop")
-    x = 6
+    x = 1
     do {
         print("$x ")
         x++
@@ -525,21 +543,22 @@ fun loops(){
     //Foor Loop: Iterating through a range
     println("\n----------------------------------")
     println("Foor Loop: Iterating through a range")
-    for(value in 1..10) {
+    for(value in 1..20 ) {
         print("$value ")
     }
 
     //Foor Loop: Iterating through an array
+    var miArray = arrayOf(1, 2,  3,  4)
     println("\n----------------------------------")
     println("Foor Loop: Iterating through an array")
-    for(value in 1..10) {
+    for(value in miArray) {
         print("$value ")
     }
 
     //Foor Loop: Iterating through an array using its indices
     println("\n----------------------------------")
     println("Foor Loop: Iterating through an array using its indices")
-    var primeNumbers = intArrayOf(2, 3, 5, 7, 11)
+    var primeNumbers = intArrayOf(1, 2, 3, 5, 7, 11)
     println(Arrays.toString(primeNumbers))
 
     println("\n----------------------------------")
@@ -555,8 +574,8 @@ fun loops(){
     //Foor Loop: Iterating through an array using withIndex()
     println("\n----------------------------------")
     println("Foor Loop: Iterating through an array using withIndex()")
-    for((index, number) in primeNumbers.withIndex()) {
-        println("PrimeNumber[${index}]: $number")
+    for((index, value) in primeNumbers.withIndex()) {
+        println("PrimeNumber[${index}]: $value")
     }
 
     //Break and Continue
@@ -564,10 +583,11 @@ fun loops(){
     println("Break and Continue")
     for (num in 1..100) {
         if (num % 3 == 0 && num % 5 == 0) {
-            println("First positive no divisible by both 3 and 5: ${num}")
+            println("First positive divisible by both 3 and 5: ${num}")
             break
         }
     }
+
 
     //Skip to the next iteration of a loop using the continue keyword
     //Mostramos solo los impares
@@ -588,9 +608,20 @@ fun loops(){
 fun functions(){
     println("\n----------------------------------")
     println("MultiplesOf")
-    val a=3
+    val inicial=5
+
+    multiplesOf(last=50, multipleOf = 2)
+
+    multiplesOf(inicial, 50, 4)
+
     multiplesOf(
-        a,
+        inicial,
+        50,
+        3
+    )
+
+    multiplesOf(
+        inicial,
         50,
         3,
     )
@@ -605,6 +636,7 @@ fun functions(){
     multiples(5,10,2)
     multiples(last=60)  //Podemos obviar los que tienen valor por defecto.
     multiples(last=10, multipleOf=3, first=4)  //Si ponemos los nombres podemos cambiar el orden
+    println("que pasa aqui?")
     multiples(first=100, multipleOf=2, last=50)  //Que pasa aqui?
 
     println("\n----------------------------------")
@@ -675,7 +707,7 @@ fun overThreshold(value:Int):Boolean{
 fun overThresh(value:Int):Boolean = value>14
 
 fun lambda2(){
-    println("Hello Lambdas")
+    println("Hello from lamba2()")
 }
 
 //Lambdas ---------------------------------------------
@@ -683,9 +715,13 @@ fun lambdas(){
     println("\n----------------------------------")
     lambda2()
 
+
     println("Hello Lambdas")
-    val lambda1 = { println("Hello Lambdas") }
-    lambda1
+    val lambda1 = { println("Hello from lambda1") }
+
+    lambda1()
+
+    lambda1.invoke()
 
     println(lambda1)
 
@@ -699,7 +735,11 @@ fun lambdas(){
     //Creamos la Lambda, pero la asignamos a una variable, esa variable es una función ahora.
     val sumaLambda: (Int, Int) -> Int = { a, b -> a+b}
     //La usamos.
-    println(sumaLambda(3,4))
+    var b=sumaLambda.invoke(5,8)
+    b=sumaLambda(7,3)
+    println(sumaLambda(3,5))
+    println(b)
+
 
     println("\n----------------------------------")
     println("CatAge con Lambda")
@@ -717,6 +757,11 @@ fun lambdas(){
     println("\n----------------------------------")
     println("Using it as parameter")
     //Como tenemos un único parámetro podemos sustituir su uso por it
+
+    val theCatAge3: (Int)->Int = {
+        it*8
+    }
+
     val theCatAge: (Int) -> Int = {
         it *7
     }
@@ -740,18 +785,18 @@ fun lambdas(){
     println("\n----------------------------------")
     println("Lambdas as functions arguments")
 
-    //La funcción   processLanguages esta definida fuera (abajo), echarle un vistazo.
+    //La función   processLanguages esta definida fuera (abajo), echarle un vistazo.
     //Es una función que recibe un lambda en su parametro action:
     //Ese lambda recibe un parametro String y devuelve Unit
 
     //Creamos una lista de lenguajes de programación
     val languages = listOf("Kotlin", "Java", "Swift", "Dart", "Rust")
     println(languages)
+
     //Creamos un lambda para pasarselo como parametro a la función processLanguages
     val action = { language: String -> println("$language length =" +  "$language".length) }
     //LLamamos a processLanguaes con el action definido
     processLanguages(languages, action)
-
 
     //Creamos otro lambda y otra forma de construirla
     val action2: (String) -> Unit = {  print("[$it]")}
@@ -762,19 +807,20 @@ fun lambdas(){
     //Pero podemos pasar la definición de la lambda justo cuando llamamos a la función
     //sin necesidad de almacenarla en una variable
     println("\n... pasando la definción en la llamada")
-    processLanguages(languages, {language:String -> print("[ $language ]") } )
+    processLanguages(languages, {language:String -> println("[ $language ]") } )
 
 
 
-    //Pero esta forma de llamara a la función es un poco enrevesada de leer
+
+    //Pero esta forma de llamar a la función es un poco enrevesada de leer
     //En este caso el cuerpo de la lambda es corto y puede verse, pero si es mas largo se complica la lectura del código.
     //Por eso Kotlin ha definido la sintaxis especial Trailing Lambda que se puede aplicar
     //cuando la lambda es el último parámetro en la llamada a una función.
     //Usando la sintaxis Trailing Lambda, la lambda se puede poner fuera de la llamada a la función.
     println("\n-----------------------")
 
-    processLanguages(languages) { language:String ->
-        println("--> $language")
+    processLanguages(languages) { valor:String ->
+        println("--> $valor")
     }
 
     //Ademas podemos  omitir el tipo de datos de language pues lo infiere el compilador del List
@@ -797,6 +843,7 @@ fun lambdas(){
         //Un simple 12 que es la última instrucción del lambda, por lo que el retorno es 12
         12
     }
+
     enhancedMessage("Esto es otro mensaje"){
         //ahora pasamos la función suma que recibe dos enteros y que devuelve un Int.
         sumaLambda(3,4)
@@ -805,13 +852,16 @@ fun lambdas(){
     println("\n----------------------------------")
     println("Más lambdas as functions arguments")
     println(languages)
-    languages.forEach { println(it) }
+    languages.forEach{ println(it) }
 
     println("-------")
     // Aplicamos funciones encadenadas al array de lambdas.
-    // Es decir, primero seleccionamos los que empiezan por K, luego lo pasamos a minúsculas y todos ellos los imprimimos
+    // Es decir, primero seleccionamos los que empiezan por K,
+    // luego lo pasamos a minúsculas y todos ellos los imprimimos
+
     languages
-        .filter { it.startsWith("K")}
+        .filter { it.contains("a") }
+        //.filter { it.startsWith("Ko")}
         //La siguiente llamada tiene tela, la función replaceFirstChar (que suplanta a .capitalize())
         // también tiene un trailing lambda, su it recibe la primera letra y a esta le aplica un lowercase
         .map { it.replaceFirstChar { it.lowercase()} }
@@ -952,7 +1002,7 @@ fun lambdas(){
     // Las lambdas anteriornes no devuelven nada, que pasa si queremos devolver un string?
     // La siguiente lambda devuelve un String, el caso base devuelvele la concatenación
     // La devolución por etiqueta devuelve cadena vacía
-    val theLambdaString = greet@{ greeting: String, name: String ->
+    val theLambdaString: (String, String) -> String  = greet@{ greeting: String, name: String ->
         if(greeting.length < 3) return@greet ""
 
         "$greeting $name"
@@ -968,6 +1018,7 @@ fun lambdas(){
     println("[${theLambdaString("Hi","Miguel")}]")
     println("... pero como devuelve la cadena vacía lo probamos con otro parámetro greeting")
     println("[${theLambdaString("Hola","Miguel")}]")
+
 
     //Extendemos la devolución a más de un caso no default
     println("Ejemplo de multiples ")
@@ -995,6 +1046,7 @@ fun lambdas(){
     lambdaClousure() // output: Welcome Our Favorite Student
     currentStudentName = "Onofre"
     lambdaClousure() // output: Welcome Onofre
+    return
 }
 
 fun sumaNormal(x:Int, y:Int):Int{
@@ -1030,6 +1082,30 @@ fun destructuring(){
     println(id)     //1
     println(name)   //Jon Snow
     println(age)    //20
+
+    //Solo las propiedades declaradas en el constructor primario tienen operaciones asociadas.
+    data class Persona(val name: String) {
+        var age: Int = 0
+    }
+    //    .equals()/.hashCode() pair.
+    //    .toString() of the form "User(name=John, age=42)".
+    //    .componentN() functions corresponding to the properties in their order of declaration.
+    //    .copy()
+    var person_a = Persona("John")
+    var person_b = Persona("John")
+
+    person_a.age = 10
+    person_b.age = 20
+
+    println("person_a == person_b: ${person_a == person_b}")
+    // person_a == person2: true
+
+    println("person_a with age ${person_a.age}: ${person_b}")
+    // person_a with age 10: Person(name=John)
+
+    println("person2 with age ${person_b.age}: ${person_b}")
+    // person_b with age 20: Person(name=John)
+
 
     //Internamente un objeto que puede desestructurarse tiene la función componentN() desde 1 hasta el que haga falta
     val person2 = Person( 2, "Miguel", 32)
@@ -1071,6 +1147,7 @@ fun destructuring(){
     }
     lambdaPair2("id-345" to 445)
 
+    //Underscore for unused variables
     println("\n----------------------------------")
     println("Pasamos del id")
     val (_, namep, agep) = person2
@@ -1135,16 +1212,32 @@ fun collections(){
     for(key in immutableMap.keys){
         println(immutableMap[key])
     }
+    println();
     val cardinales = mapOf("Norte" to 12, "Sur" to 6, "Este" to 3, "Oeste" to 9)
     println(cardinales)
     cardinales.keys.forEach{println(it)}
     cardinales.values.forEach{println(it)}
     if ("Sur" in cardinales) println("Podemos ir al Sur pulsando ${cardinales["Sur"]}")
-    if (6 in cardinales.values) println("La tecla 6 permite movimiento")
+    if (6 in cardinales.values) //Si esta el 6 en los valores
+        //Imprimimos la clave que tiene el valor 6
+        println("La tecla 6 permite el movimiento ${cardinales.keys.elementAt(cardinales.values.indexOf(6)) }")
+
+    //La variable inmutableMap es mutable, pero el mapOf devuelve un Map inmutable
+    //Eso quiere decir que no podemos añadir ni quitar elementos.
+    //pero podemos cambiar el mapa entero
+    //Si inmutableMap se hubiese definido con val no podríamos cambiar el mapa entero.
+    immutableMap = mapOf(9 to "Antonio",8 to "Pedro",7 to "Juan")
+    //Imprimimos el mapa entero poniendo entre corchetes los valores y usando desestructuración
+    for((key, value) in immutableMap){
+        println("[$key] -> $value")
+    }
+    //Otra forma sin desestructurar
+    for(key in immutableMap.keys){
+        println(immutableMap[key])
+    }
 
     println("\n----------------------------------")
     println("Mutable list")
-
 
     var mutableList = mutableListOf("Alberto","Nuria","Paola")
     // we can modify the element
@@ -1154,6 +1247,31 @@ fun collections(){
     for(item in mutableList){
         println(item)
     }
+    println("-----")
+    //Otra forma de imprimir la lista sería
+    for(i in 0..mutableList.size-1){
+        println(mutableList[i])
+    }
+    println("-----")
+    //Pero si queremos imprimir la posición de cada elemento
+    for((index, value) in mutableList.withIndex()){
+        println("[$index] -> $value")
+    }
+//    //¿Puedo añadir un elemento en un indice no contiguo?
+//    //La respuesta es no, da error.
+//    mutableList.add(8,"Miguel")
+//    println("-----")
+//    //Pero si queremos imprimir la posición de cada elemento
+//    for((index, value) in mutableList.withIndex()){
+//        println("[$index] -> $value")
+//    }
+    println("-----")
+    //Si lo añado en el inidice 4, si que lo añade.
+    mutableList.add(4,"Miguel")
+    for((index, value) in mutableList.withIndex()){
+        println("[$index] -> $value")
+    }
+
 
     println("\n----------------------------------")
     println("Mutable set")
@@ -1164,16 +1282,24 @@ fun collections(){
     for(item in mutableSet){
         println(item)
     }
+    // eliminar un elemento comprobando previamente si existe
+    if(mutableSet.contains(10)){
+        mutableSet.remove(10)
+    }
+    //Ahora el elmento 10 no existe, pero la eliminación no da error. Simplemnte no hace nada.
     mutableSet.remove(10)
+
     println("-----")
     for(item in mutableSet){
         println(item)
     }
+    //Volviendo a añadir el 10
     mutableSet.add(10)
     println("-----")
     for(item in mutableSet){
         println(item)
     }
+    //Añaadimos el 10 otra vez, pero como es un Set no se añade, pues solo puede haber un 10
     println("----- adding 10 again")
     mutableSet.add(10)
     for(item in mutableSet){
@@ -1182,7 +1308,7 @@ fun collections(){
 
     println("\n----------------------------------")
     println("Mutable map")
-    var mutableMap = mutableMapOf<Int,String>(1 to "Juan",2 to "Nicolás",3 to "Ana")
+    var mutableMap = mutableMapOf(1 to "Juan",2 to "Nicolás",3 to "Ana")
     // we can modify the element
     mutableMap.put(1,"Juanito")
     // add one more element in the list
@@ -1335,6 +1461,22 @@ fun collections(){
     println(subList)
     subList = myListOfNames.filter { it.contains('l', ignoreCase = true) }
     println(subList)
+
+    println("----------------------------------")
+    println(" ArrayDeque")
+
+    val deque = ArrayDeque(listOf(1, 2, 3))
+
+    deque.addFirst(0)
+    deque.addLast(4)
+    println(deque) // [0, 1, 2, 3, 4]
+
+    println(deque.first()) // 0
+    println(deque.last()) // 4
+
+    deque.removeFirst()
+    deque.removeLast()
+    println(deque) // [1, 2, 3]
 
 }
 
