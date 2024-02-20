@@ -1320,6 +1320,7 @@ fun collections(){
     //Operador indice
     mutableCardinales["SurEste"]=5
     mutableCardinales["SurOste"]=7
+    mutableCardinales["NorOeste"]=10
     println(mutableCardinales)
 
     println("\n----------------------------------")
@@ -1330,20 +1331,24 @@ fun collections(){
 
     println("\n----------------------------------")
     println("List of Names -> for loop")
+    //Iteramos sobre la lista con un bucle for
     for (name in myListOfNames){
         println("Nombre: $name")
     }
 
     println("\n----------------------------------")
     println("List of Names -> .foreach")
+    //Ahora iteramos sobre la lista con el método foreach y un lambda
     myListOfNames.forEach(){
         println("Nombre $it")
     }
+
     println("-----")
-    //trailing lambda.
+    //trailing lambda. No ponemos los paréntesis
     myListOfNames.forEach {
         println("Nombre $it")
     }
+
     println("-----")
     //trailing lambda + named parameter
     myListOfNames.forEach {nombre:String->
@@ -1373,6 +1378,8 @@ fun collections(){
     //Kotlin nos avisa que podemos cambiar get por el operador indice
     println("El segundo elmento es ${myMutableList.get(1)}")
     println("El segundo elmento es ${myMutableList[1]}")
+
+    println("--------")
     println("Find Index of First Occurrence of Element in List")
     val list1 = listOf("ab", "bc", "cd", "de", "ef")
     var element = "de"
@@ -1384,10 +1391,18 @@ fun collections(){
     println("List.indexOf() to Check if \"$element\" is in List")
     element="de"
     if (list1.indexOf(element) > -1) {
-        print("$element is in list.")
+        println("$element is in list.")
     } else {
-        print("$element is not in list.")
+        println("$element is not in list.")
     }
+    //Otra forma de ver si un elemento está en la lista sería
+    if (element in list1) {
+        println("$element is in list.")
+    } else {
+        println("$element is not in list.")
+    }
+
+
     //Kotlin no tiene el operador ternario (expresion) ? valortrue : valor false
     //Pero podemos usar:
     val strResult = if (list1.indexOf(element)>-1)  "Esta" else  "No esta"
@@ -1403,9 +1418,10 @@ fun collections(){
     for (i in 1..10){
         miLista.add("Dato $i")
     }
-    println(miLista)
+    miLista.forEach{println(it)}
 
-    //Si queremos crearlos primero vacios....
+
+    //Si queremos crear las colecciones primero vacias....
     val myList = mutableListOf<String>()
     val mySet = mutableSetOf<Int>()
     val myMap = mutableMapOf<String,Int>()
@@ -1432,6 +1448,9 @@ fun collections(){
     myMapOfNames.forEach{println(it.key)}
     val hombres=myMapOfNames.filterValues { it==gHombre }
     println("Chicos ${hombres.keys}")
+    //mostramos ahora las mujeres directamente con el filtro
+    println("Chicas ${myMapOfNames.filterValues { it==gMujer }.keys}")
+
 
     println("\nBuscando en una lista")
     println("----------------------------------")
@@ -1443,28 +1462,41 @@ fun collections(){
     println(encontrado)
     if (encontrado.size > 0) println("$buscado esta") else println("$buscado no esta")
 
+    //Otra forma de mostrar si Antonio está en la lista es:
+    println("Antonio esta en la lista? ${myListOfNames.filter { it == "Antonio" }.size>0}")
+    //Pero poniendo si o no en lugar de true o false
+    println("Antonio esta en la lista? ${if (myListOfNames.filter { it == "Antonio" }.size>0) "Si" else "No"}")
+
+    //Otra forma de hacerlo
     var found = myListOfNames.filter { it=="Miguel" }.size>0
     if (found) println("Encontrado") else println("No Encontrado")
 
     println("\nOtros filtros")
     println("----------------------------------")
     println(myListOfNames)
+    //Aqui lo que hacemos es
     var subList = myListOfNames.filter {
-        !(it.endsWith('a') ||
-                it.endsWith('o'))
+        !( it.endsWith('a') || it.endsWith('o') )
     }
+
     println("----")
+    //Y los pasamos a minúsculas
     println(subList.map { it.lowercase() })
     println(subList)
+
     println("----")
+    //Aqui lo que hacemos es mostrar los que empiezan por L
     subList = myListOfNames.filter { it.startsWith('L',ignoreCase = true) }
     println(subList)
+
+    //Aqui lo que hacemos es mostrar los que contienen una l
     subList = myListOfNames.filter { it.contains('l', ignoreCase = true) }
     println(subList)
 
     println("----------------------------------")
     println(" ArrayDeque")
-
+    //Un ArrayDeque es una lista que se puede usar como cola o como pila.
+    //porque podemos añaadir y quitar elementos por ambos extremos.
     val deque = ArrayDeque(listOf(1, 2, 3))
 
     deque.addFirst(0)
