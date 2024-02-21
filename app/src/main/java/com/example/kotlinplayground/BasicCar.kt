@@ -1,27 +1,27 @@
 package com.example.kotlinplayground
 
-//v1------------
-class BasicCar {
-    var color : String ="white"
-    var model : String ="STW"
-
-    fun drive(){
-        println("Car is driving .rrrrmm")
-    }
-
-    fun info(){
-        println("Car Info ------")
-        println("Color: $color")
-        println("Model: $model")
-        println("---------------")
-    }
-}
+////v1------------
+//class BasicCar {
+//    var color : String ="white"
+//    var model : String ="STW"
+//
+//    fun drive(){
+//        println("Car is driving .rrrrmm")
+//    }
+//
+//    fun info(){
+//        println("Car Info ------")
+//        println("Color: $color")
+//        println("Model: $model")
+//        println("---------------")
+//    }
+//}
 
 ////v2------------
 ////  Primary constructor (sin declaración)
 //class BasicCar(color:String, model:String) {
 //    var color: String = color
-//    val model: String = model
+//    val model: String = model  //val es inmutable
 //
 //    fun drive() {
 //        println("Car is driving .rrrrmm")
@@ -36,7 +36,7 @@ class BasicCar {
 //}
 
 ////v3------------
-////  Primary constructor (declaramos en el constructor primario)
+////  Primary constructor (declaramos los atributos en el constructor primario)
 //class BasicCar(var color:String, val model:String) {
 //    //Ya no hace falta declararlas aquí
 ////    var color: String = color

@@ -57,8 +57,8 @@ class Derived(
 //}
 
 ////Rectangle v2-------------------------------------
-class Rectangle(val width: Double, val height: Double) {
-   open fun draw() { println("Drawing a rectangle") }
+open class Rectangle(val width: Double, val height: Double) {
+    open fun draw() { println("Drawing a rectangle ${width}x${height}") }
     val borderColor: String get() = "black"
 
 //    //primera opcion, indicamos el tipo

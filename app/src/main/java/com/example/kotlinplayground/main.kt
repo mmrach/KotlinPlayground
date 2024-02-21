@@ -11,7 +11,7 @@ fun main(){
     //functions()
     //lambdas()
     //destructuring()
-    collections()
+    //collections()
     //clases()
     //interfaces()
     //extensionFunctions()
@@ -1083,6 +1083,12 @@ fun destructuring(){
     println(name)   //Jon Snow
     println(age)    //20
 
+    println(person1.id)
+    println(person1.name)
+    println(person1.age)
+
+
+
     //Solo las propiedades declaradas en el constructor primario tienen operaciones asociadas.
     data class Persona(val name: String) {
         var age: Int = 0
@@ -1112,6 +1118,7 @@ fun destructuring(){
     val id2 = person2.component1();
     val name2 = person2.component2();
     val age2 = person2.component3();
+
 
     println("\n----------------------------------")
     println("Destructuring as return values")
@@ -1147,6 +1154,7 @@ fun destructuring(){
     }
     lambdaPair2("id-345" to 445)
 
+
     //Underscore for unused variables
     println("\n----------------------------------")
     println("Pasamos del id")
@@ -1170,6 +1178,8 @@ fun destructuring(){
         println("Key: $key, Value: $value")
     }
 
+    //Si queremos ver cuantos elementos tiene el mapa
+    println("El mapa tiene ${map.size} elementos")
 }
 
 //Collections ---------------------------------------------
@@ -1184,9 +1194,33 @@ fun collections(){
     val immutableList = listOf("Pedro","Juan","Antonio")
     // gives compile time error. No existe el método add
     //immutableList.add = "Jesús"
+
     for(item in immutableList){
         println(item)
     }
+
+    //Iterando al estilo c sería asi:
+    for(i in 0..immutableList.size-1){
+        println(immutableList[i])
+    }
+
+
+
+    //Otra forma de iterar al estilo c sería
+    for(i in immutableList.indices){
+        println(immutableList[i])
+    }
+
+    //Iterando proporcionando el step sería
+    for(i in 0..immutableList.size-1 step 2){
+        println(immutableList[i])
+    }
+
+    //Iterando con un forEach sería asi
+    immutableList.forEach{println(it)}
+
+
+
 
     println("\n----------------------------------")
     println("Inmutable set")
@@ -1200,6 +1234,8 @@ fun collections(){
         println(item)
     }
 
+    //iterando por el set con un forEach
+    immutableSet.forEach{println(it)}
 
     println("\n----------------------------------")
     println("Inmutable map")
@@ -1212,15 +1248,29 @@ fun collections(){
     for(key in immutableMap.keys){
         println(immutableMap[key])
     }
-    println();
+    println(immutableMap.keys);
+
+    //iterando por el mapa con un forEach
+    immutableMap.forEach{println(it)}
+
+    //iterando por el mapa con un forEach mostrando solo el valor
+    immutableMap.forEach{(_, value) -> println(value)}
+
+    //iterando por los values del mapa con un forEach
+    immutableMap.values.forEach{println(it)}
+
+
+
     val cardinales = mapOf("Norte" to 12, "Sur" to 6, "Este" to 3, "Oeste" to 9)
     println(cardinales)
     cardinales.keys.forEach{println(it)}
     cardinales.values.forEach{println(it)}
     if ("Sur" in cardinales) println("Podemos ir al Sur pulsando ${cardinales["Sur"]}")
-    if (6 in cardinales.values) //Si esta el 6 en los valores
+
+    if (6 in cardinales.values){ //Si esta el 6 en los valores
         //Imprimimos la clave que tiene el valor 6
         println("La tecla 6 permite el movimiento ${cardinales.keys.elementAt(cardinales.values.indexOf(6)) }")
+    }
 
     //La variable inmutableMap es mutable, pero el mapOf devuelve un Map inmutable
     //Eso quiere decir que no podemos añadir ni quitar elementos.
@@ -1240,13 +1290,16 @@ fun collections(){
     println("Mutable list")
 
     var mutableList = mutableListOf("Alberto","Nuria","Paola")
+    println(mutableList)
     // we can modify the element
     mutableList[0] = "María Pilar"
+    println(mutableList)
     // add one more element in the list
     mutableList.add("Carlota")
     for(item in mutableList){
         println(item)
     }
+
     println("-----")
     //Otra forma de imprimir la lista sería
     for(i in 0..mutableList.size-1){
@@ -1257,9 +1310,11 @@ fun collections(){
     for((index, value) in mutableList.withIndex()){
         println("[$index] -> $value")
     }
+
 //    //¿Puedo añadir un elemento en un indice no contiguo?
 //    //La respuesta es no, da error.
-//    mutableList.add(8,"Miguel")
+//    mutableList.add(4,"Miguel")
+//    println(mutableList)
 //    println("-----")
 //    //Pero si queremos imprimir la posición de cada elemento
 //    for((index, value) in mutableList.withIndex()){
@@ -1275,7 +1330,7 @@ fun collections(){
 
     println("\n----------------------------------")
     println("Mutable set")
-    var mutableSet = mutableSetOf<Int>(6,10)
+    var mutableSet = mutableSetOf(6,10)
     // adding elements in set
     mutableSet.add(2)
     mutableSet.add(5)
@@ -1325,7 +1380,7 @@ fun collections(){
 
     println("\n----------------------------------")
     println("List of Names -> println")
-    val myListOfNames = listOf("Pedro", "Pablo", "Antonio", "Lucía", "Carmen")
+    val myListOfNames = listOf("Pedro", "Pablo", "Antonio", "Lucía", "Carmen", "Antonio")
     println(myListOfNames)
     println("En total ${myListOfNames.size}")
 
@@ -1382,8 +1437,10 @@ fun collections(){
     println("--------")
     println("Find Index of First Occurrence of Element in List")
     val list1 = listOf("ab", "bc", "cd", "de", "ef")
-    var element = "de"
+    var element = "dee"
     val index = list1.indexOf(element)
+    println(index)
+
     list1.forEach{println(it)}
     println("Index of element \"$element\" in the list is $index")
 
@@ -1446,8 +1503,11 @@ fun collections(){
         "Juan" to gOtro,
     )
     myMapOfNames.forEach{println(it.key)}
+
     val hombres=myMapOfNames.filterValues { it==gHombre }
+    println(hombres)
     println("Chicos ${hombres.keys}")
+
     //mostramos ahora las mujeres directamente con el filtro
     println("Chicas ${myMapOfNames.filterValues { it==gMujer }.keys}")
 
@@ -1455,15 +1515,17 @@ fun collections(){
     println("\nBuscando en una lista")
     println("----------------------------------")
     println(myListOfNames)
-    var buscado="Antonio"
+    var buscoa="Antonio"
     var encontrado = myListOfNames.filter {
-        it == buscado
+        it == buscoa
     }
     println(encontrado)
-    if (encontrado.size > 0) println("$buscado esta") else println("$buscado no esta")
+    if (encontrado.size > 0) println("$buscoa esta ${encontrado.size} veces") else println("$buscoa no esta")
+
 
     //Otra forma de mostrar si Antonio está en la lista es:
     println("Antonio esta en la lista? ${myListOfNames.filter { it == "Antonio" }.size>0}")
+
     //Pero poniendo si o no en lugar de true o false
     println("Antonio esta en la lista? ${if (myListOfNames.filter { it == "Antonio" }.size>0) "Si" else "No"}")
 
@@ -1478,11 +1540,18 @@ fun collections(){
     var subList = myListOfNames.filter {
         !( it.endsWith('a') || it.endsWith('o') )
     }
+    println(subList)
+
+    subList = myListOfNames.filter {
+        !( it.endsWith('a')  )
+    }
+    println(subList)
 
     println("----")
     //Y los pasamos a minúsculas
     println(subList.map { it.lowercase() })
     println(subList)
+
 
     println("----")
     //Aqui lo que hacemos es mostrar los que empiezan por L
@@ -1510,6 +1579,7 @@ fun collections(){
     deque.removeLast()
     println(deque) // [1, 2, 3]
 
+
 }
 
 //--------------------------------------------------
@@ -1518,23 +1588,28 @@ fun collections(){
 fun clases(){
     //Ir descomentando por versiones de clase.
 //    //v1----------------
-//    println("\nUsing BasicCar v1")
+//    println("----------------------")
+//    println("Using BasicCar v1")
 //    println("----------------------")
 //
+//    //Creamos un objeto de la clase BasicCar
 //    val myCar = BasicCar()
 //    println(myCar) //imprime el codigo de objeto
-//    println(myCar.color)
-//    println(myCar.model)
+//    println(myCar.color) //imprime el valor de la propiedad color
+//    println(myCar.model) //imprime el valor de la propiedad model
 //    println("MyCar Info: color=${myCar.color} model=${myCar.model}")
 //
-//    //Como en v1 las variables son var las puedo cambiar fuera
+//    //Como en v1 las variables son var, es decir mutables, las puedo cambiar fuera
 //    myCar.color="Rojo"
+//    //LLamamos a la función drive
 //    myCar.drive();
 //    //usando la función Info.
 //    myCar.info()
-//
+//    return
+
 //    //v2-------------------
-//    println("\nUsing BasicCar v2")
+//    println("----------------------")
+//    println("Using BasicCar v2")
 //    println("----------------------")
 //
 //    val myCar = BasicCar("Verde", "Turbo WX")
@@ -1550,6 +1625,7 @@ fun clases(){
 //    myCar.drive();
 //    //usando la función Info.
 //    myCar.info()
+//    return
 
 //    //v3-------------------
 //    println("\nUsing BasicCar v3")
@@ -1573,6 +1649,7 @@ fun clases(){
 //
 //    val otherCar=BasicCar(color = "Negro", model = "jET")
 //    otherCar.info()
+//    return
 
 //    //v4-------------------
 //    println("\nUsing BasicCar v4")
@@ -1684,16 +1761,28 @@ fun clases(){
 //    println("Constructing the derived class(\"hello\", \"world\")")
 //    Derived("hello", "world")
 //
+
 //    println("\nCalling the superclass implementation FilledRectangle v1")
 //    println("----------------------")
 //    val fr = FilledRectangle()
 //    fr.draw()
+//
+//    //Imprimimos el valor de la propiedad de la clase base fillcolor
+//    println("Color de relleno: ${fr.fillColor}")
+
 
 //    println("\nCalling the superclass implementation FilledRectangle v2")
-//    println("----------------------")
+//    println("---------------------")
 //    val fr = FilledRectangle()
 //    fr.draw()
 
+
+//    println("\nCalling Rectangle v2")
+//    println("---------------------")
+//    val rectangle = Rectangle(10.0, 20.0)
+//    rectangle.draw()
+//
+//
 //    println("\nNon Default Setters - Girl example")
 //    println("----------------------")
 //    val maria = Girl()
